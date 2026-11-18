@@ -34,67 +34,6 @@ class ProcessingElement:
     # Handling Each Instruction
     def execute_instruction(self, instruction : ProcessingElementInstruction) -> None:
         # START IMPLEMENTATION
-        opcode = instruction.get_opcode().uint #have to make sure to convert to unsigned int
-        value = instruction.get_value().uint
-
-        if opcode == PEI.RND:
-            self._handle_rnd(instruction)
-        elif value == PEI.MAC:
-            self._handle_mac(instruction)
-        elif value == PEI.NOP:
-            pass
-        elif value == PEI.OUT:
-            self._handle_out(instruction)
-        elif value == PEI.PASS:
-            self._handle_pass(instruction)
-        elif value == PEI.CLR:
-            self._handle_clr(instruction)
-        # END IMPLEMENTATION
-        return None
-
-    
-    #HANDLE FUNCS I WROTE FOR HANDLE MAC
-    def split_lanes(x, lane_w, num_lanes):
-        #lane 0 is least sig
-        #split x into numlanes names w/ lanew widths per lane
-         mask = (1 << lane_w) - 1   #drop last w bits
-         lanes = []
-         for i in range(num_lanes):from bitstring import Bits
-from .instruction import ProcessingElementInstruction, PEI
-from dataclasses import dataclass
-
-@dataclass
-class ProcessingElementConfiguration:
-    INPUT_BITWIDTH        : int
-    ACCUMULATION_BITWIDTH : int
-    OUTPUT_BITWIDTH       : int
-
-class ProcessingElement:
-
-    def __init__(
-        self,
-        config : ProcessingElementConfiguration,
-        default_value = 0
-    ):
-
-        # Saving Inputs
-        self._config = config
-
-        # Creating Bitstrings
-        self._input_a_value = Bits(int=default_value, length=self._config.INPUT_BITWIDTH)
-        self._input_b_value = Bits(int=default_value, length=self._config.INPUT_BITWIDTH)
-        self._acc_value     = Bits(int=default_value, length=self._config.ACCUMULATION_BITWIDTH)
-        self._output_value  = Bits(int=default_value, length=self._config.OUTPUT_BITWIDTH)
-
-    def input_a(self, value : Bits) -> None:
-        self._input_a_value = value
-
-    def input_b(self, value : Bits) -> None:
-        self._input_b_value = value
-
-    # Handling Each Instruction
-    def execute_instruction(self, instruction : ProcessingElementInstruction) -> None:
-        # START IMPLEMENTATION
         # Your Code Here
         """
         The instruction input to the PE has three fields: Opcode, Mode, and Value.
